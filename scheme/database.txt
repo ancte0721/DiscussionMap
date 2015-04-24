@@ -1,0 +1,35 @@
+CREATE TABLE pluto_tag(
+id int unsigned NOT NULL primary key,
+name varchar(50) NOT NULL,
+comment text,
+url varchar(255),
+color varchar(10) NOT NULL DEFAULT "#000000",
+owner int NOT NULL DEFAULT -1,
+validity tinyint(1) NOT NULL DEFAULT 1
+);
+
+CREATE TABLE pluto_status(
+statusid SERIAL,
+date timestamp NOT NULL,
+userid int unsigned NOT NULL,
+tagid int unsigned NOT NULL,
+relationtype int unsigned NOT NULL DEFAULT 0,
+relationids varchar(255)
+);
+
+CREATE TABLE pluto_message(
+messageid SERIAL,
+message varchar(255),
+messagetype varchar(255),
+tagid int,
+target int NOT NULL DEFAULT -1
+);
+
+insert into pluto_message (message, messagetype) values ("システムからのメッセージ", 'text');
+insert into pluto_message (message, messagetype, tagid) values ("システムからのメッセージ", 'topic', 2);
+
+insert into pluto_tag (id,name,comment,url,color) values (0,"勉強関係","あいうえおーー","http://id0.jpg","#ff0000");
+insert into pluto_tag (id,name,comment,url,color) values (1,"勉強関係2","あいうえおー2","http://id1.jpg","#00ff00");
+
+
+select * from data,type where data.type_id=type.type_id and data.user_id=type.user_id;
